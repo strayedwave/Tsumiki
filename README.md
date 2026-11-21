@@ -25,6 +25,8 @@ import { Button, Heading } from "@strayedwave/tsumiki";
 - ライトテーマを適用する場合は、`<html data-theme="light">` を指定してください。
 - アニメーション関連の API は `@strayedwave/tsumiki/motion` からインポートできます。
 
+[利用ガイド](./docs/usage.md) では、部品の組み合わせとスクロール領域の設定を紹介しています。
+
 ## ライセンス
 
 [MIT](./LICENSE)
