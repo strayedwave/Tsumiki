@@ -11,5 +11,20 @@
   "peerDependencies": {
     "@solidjs/web": "^2.0.0",
     "solid-js": "^2.0.0"
-  }
+  },
+  "scripts": {
+    "docs:dev": "node docs/parameters.mjs && vite --host 127.0.0.1",
+    "docs:build": "node docs/parameters.mjs && vite build",
+    "docs:check": "node docs/parameters.mjs && tsc --noEmit"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.3",
+    "@solidjs/babel-plugin": "2.0.0",
+    "@solidjs/vite-plugin": "3.0.0",
+    "@solidjs/web": "2.0.0",
+    "solid-js": "2.0.0",
+    "typescript": "~5.8.3",
+    "vite": "^8.0.0"
+  },
+  "packageManager": "pnpm@12.18.0"
 }

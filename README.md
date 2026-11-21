@@ -27,6 +27,10 @@ import { Button, Heading } from "@strayedwave/tsumiki";
 
 [利用ガイド](./docs/usage.md) では、部品の組み合わせとスクロール領域の設定を紹介しています。
 
+## コンポーネントカタログ
+
+`pnpm install` のあと `pnpm docs:dev` を実行します。左の一覧から部品を選び、プレビューとパラメータを確認できます。ヘッダーでテーマを切り替えられます。`pnpm docs:build` で静的サイトを `docs/dist/` に生成します。
+
 ## ライセンス
 
 [MIT](./LICENSE)
