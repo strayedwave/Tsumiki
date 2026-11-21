@@ -1,0 +1,17 @@
+/* 開閉する領域(collapse.ts / Collapsible.tsx)。
+   高さは測らず、grid-template-rows の 0fr↔1fr で動かす。
+   はみ出す部品(フォーカスリングなど)を切らないよう、動いている間だけ中身を切り取る。 */
+.motion-collapse {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 1fr;
+}
+.motion-collapse[hidden] {
+  display: none;
+}
+.motion-collapse-clip {
+  min-height: 0;
+}
+.motion-collapse[data-animating] > .motion-collapse-clip {
+  overflow: hidden;
+}

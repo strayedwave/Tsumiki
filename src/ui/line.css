@@ -1,0 +1,45 @@
+@layer base, ui;
+@layer ui {
+/* 部品の縁の線（ui/line.ts）。擬似要素で、枠の内側に重ねて描く（子の塗りの上に出る。大きさは変わらない）。
+   色は --line-color（既定は --divider） */
+.line-top,
+.line-bottom,
+.line-both,
+.line-start,
+.line-end {
+  position: relative;
+}
+.line-top::before,
+.line-both::before,
+.line-bottom::after,
+.line-both::after,
+.line-start::before,
+.line-end::after {
+  content: "";
+  position: absolute;
+  background: var(--line-color, var(--divider));
+  pointer-events: none;
+}
+.line-top::before,
+.line-both::before {
+  inset: 0 0 auto 0;
+  height: 1px;
+}
+.line-bottom::after,
+.line-both::after {
+  inset: auto 0 0 0;
+  height: 1px;
+}
+.line-start::before {
+  inset: 0 auto 0 0;
+  width: 1px;
+}
+.line-end::after {
+  inset: 0 0 0 auto;
+  width: 1px;
+}
+/* 隣り合う部品は、境目の線を1本にまとめる: 直前の部品が下の線を持つなら、上の線は出さない */
+:is(.line-bottom, .line-both) + :is(.line-top, .line-both)::before {
+  display: none;
+}
+}

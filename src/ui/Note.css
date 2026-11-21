@@ -1,0 +1,22 @@
+@layer base, ui;
+@layer ui {
+/* Note（ui/Note.tsx）。小さな注意書き */
+.ui-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  padding: 6px var(--ui-pad-x);
+  font-size: var(--font-caption);
+  line-height: var(--line-body);
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.ui-note-warning {
+  color: var(--danger);
+}
+.ui-note > svg {
+  flex: none;
+  margin-top: 3px;
+}
+}

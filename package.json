@@ -1,0 +1,15 @@
+{
+  "name": "@strayedwave/tsumiki",
+  "version": "0.1.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/ui/index.ts",
+    "./motion": "./src/motion/index.ts"
+  },
+  "peerDependencies": {
+    "@solidjs/web": "^2.0.0",
+    "solid-js": "^2.0.0"
+  }
+}

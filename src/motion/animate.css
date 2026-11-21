@@ -1,0 +1,24 @@
+/* 塗りつぶしの動き（motion/animate.ts の `fill`）。進み具合を、アニメーションで動かせる変数にする */
+@property --ui-fill-p {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+/* アイコンの複製を、元のアイコンの上に重ねる。塗りは `--ui-icon-fill`（既定は文字色）。
+   マスクが、`--ui-fill-angle` の向きに、進み具合 `--ui-fill-p` まで塗りを見せる（縁は少しぼかす） */
+.ui-fill-overlay {
+  position: absolute;
+  margin: 0;
+  pointer-events: none;
+  fill: var(--ui-icon-fill, currentColor);
+  stroke: currentColor;
+  mask-image: linear-gradient(
+    var(--ui-fill-angle, 0deg),
+    #000 calc(var(--ui-fill-p) - 12%),
+    transparent var(--ui-fill-p)
+  );
+}
+/* 元のアイコンが「塗りだけ」（縁なし）のときは、重ねた複製にも縁を付けず、大きさを揃える */
+[data-icon-paint="fill"] .ui-fill-overlay {
+  stroke: none;
+}

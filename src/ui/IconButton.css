@@ -1,0 +1,15 @@
+@layer base, ui;
+@layer ui {
+/* IconButton（ui/IconButton.tsx）。色・余白などは styles.css の :root の変数を使う */
+.icon-button {
+  width: var(--control-size);
+  height: var(--control-size);
+  padding: 5px;
+  border-radius: var(--radius-control);
+  flex-shrink: 0;
+}
+.icon-button svg {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+}

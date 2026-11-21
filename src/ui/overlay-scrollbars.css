@@ -1,0 +1,60 @@
+:root {
+  --overlay-scroll-size: 12px;
+}
+[data-overlay-scroll] {
+  scrollbar-width: none;
+}
+.overlay-scroll-rail {
+  position: fixed;
+  z-index: 35;
+  pointer-events: none;
+}
+.overlay-scroll-rail[hidden] {
+  display: none;
+}
+.overlay-scroll-rail[data-axis="y"] {
+  width: var(--overlay-scroll-size);
+  height: var(--rail-length);
+  transform: translateX(-100%);
+}
+.overlay-scroll-rail[data-axis="x"] {
+  width: var(--rail-length);
+  height: var(--overlay-scroll-size);
+  transform: translateY(-100%);
+}
+.overlay-scroll-rail > div {
+  position: absolute;
+  pointer-events: auto;
+  touch-action: none;
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: var(--border) padding-box;
+}
+.overlay-scroll-rail > div:hover {
+  background: var(--muted) padding-box;
+}
+.overlay-scroll-rail[data-dragging] > div {
+  background: var(--text) padding-box;
+}
+.overlay-scroll-rail[data-axis="y"] > div {
+  top: var(--thumb-offset);
+  left: 0;
+  width: 100%;
+  height: var(--thumb-length);
+}
+.overlay-scroll-rail[data-axis="x"] > div {
+  top: 0;
+  left: var(--thumb-offset);
+  width: var(--thumb-length);
+  height: 100%;
+}
+
+[data-overlay-scroll] {
+  --overlay-scroll-inset: 0px;
+}
+[data-overlay-scroll][data-overlay-y] {
+  --overlay-scroll-inset: var(--overlay-scroll-size);
+}
+[data-scroll-inset] {
+  padding-inline-end: calc(var(--scroll-content-padding-end, 0px) + var(--overlay-scroll-inset, 0px));
+}

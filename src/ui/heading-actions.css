@@ -1,0 +1,22 @@
+@layer base, ui;
+@layer ui {
+  .ui-heading-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-1) var(--space-2);
+    min-width: 0;
+    max-width: 100%;
+    margin-inline-start: auto;
+  }
+
+  .ui-heading-actions > .dropdown {
+    max-width: 100%;
+  }
+
+  .ui-heading-actions > .dropdown > select {
+    width: auto;
+    min-width: 0;
+  }
+}

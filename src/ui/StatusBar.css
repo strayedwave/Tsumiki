@@ -1,0 +1,36 @@
+@layer base, ui;
+@layer ui {
+/* StatusBar（ui/StatusBar.tsx）。色・余白などは styles.css の :root の変数を使う */
+.statusbar {
+  height: var(--standard-row-height);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px var(--chrome-inset);
+  font-size: var(--font-caption);
+  color: var(--muted);
+}
+.statusbar {
+  position: relative;
+}
+.status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  flex: 1;
+}
+.status > span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.statusbar {
+  gap: var(--space-2);
+  padding: 0;
+}
+.statusbar > .status {
+  padding-inline-start: var(--space-3);
+}
+}

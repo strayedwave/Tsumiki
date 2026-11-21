@@ -1,0 +1,86 @@
+@layer base, ui;
+@layer ui {
+/* TitleBar（ui/TitleBar.tsx）。色・余白などは styles.css の :root の変数を使う */
+.titlebar {
+  height: 56px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* 右と上は余白なし: ウィンドウ操作ボタンを角に密着させる */
+  padding: 0 0 0 var(--chrome-inset);
+  user-select: none;
+}
+.pin-button[aria-pressed=true] {
+  background: var(--active);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+.pin-button[aria-pressed=true] svg {
+  color: var(--accent);
+  fill: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+.titlebar strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--font-body);
+  font-weight: var(--weight-normal);
+  letter-spacing: -.2px;
+}
+.window-controls {
+  --caption-hover: rgb(255 255 255 / 10%);
+  --caption-active: rgb(255 255 255 / 6%);
+  display: flex;
+  flex-shrink: 0;
+  gap: 0;
+  margin-left: auto;
+  align-self: flex-start;
+}
+:root[data-theme=light] .window-controls {
+  --caption-hover: rgb(0 0 0 / 6%);
+  --caption-active: rgb(0 0 0 / 3%);
+}
+.window-controls button {
+  width: 46px;
+  height: 32px;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+}
+.window-controls button:not(:disabled):hover {
+  background: var(--caption-hover);
+}
+.window-controls button:not(:disabled):active {
+  background: var(--caption-active);
+}
+.window-controls button:focus-visible {
+  outline-offset: -2px;
+}
+.window-controls svg {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+.window-controls .caption-icon {
+  width: 10px;
+  height: 10px;
+  stroke-width: 1;
+}
+.window-controls button.close-button:not(:disabled):hover {
+  background: #c42b1c;
+  color: #fff;
+}
+.window-controls button.close-button:not(:disabled):active {
+  background: #c42b1ce6;
+  color: #ffffffb3;
+}
+.window-controls .pin-button svg {
+  width: 14px;
+  height: 14px;
+}
+.window-controls .pin-button[aria-pressed=true] {
+  background: var(--caption-hover);
+  box-shadow: none;
+}
+}

@@ -1,0 +1,27 @@
+@layer base, ui;
+@layer ui {
+/* 見出しボタンは、自分の左右の余白（--ui-pad-x）を持つ。
+   矢印（>）の位置が、ほかの部品の左端と、そろう */
+.ui-disclosure-toggle {
+  padding-inline: var(--ui-pad-x);
+}
+/* Disclosure（ui/Disclosure.tsx）の、見出しを横に並べる行（headingClass を渡したとき）。
+   幅が足りないときは、右側（extra）が、次の行へ折り返す(中身が潰れて、文字が縦に割れないように) */
+.ui-disclosure-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.ui-disclosure-heading > :first-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.ui-disclosure-heading > :not(:first-child) {
+  flex: none;
+  margin-left: auto;
+}
+.ui-disclosure-heading > .ui-heading-actions {
+  flex: 0 1 auto;
+}
+}

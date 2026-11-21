@@ -1,0 +1,96 @@
+@layer base, ui;
+@layer ui {
+/* Select（ui/Select.tsx）。色・余白などは styles.css の :root の変数を使う */
+.color-mode-select > button {
+  max-width: 160px;
+  padding: 4px 6px;
+  border: 0;
+  font-size: var(--font-label);
+}
+.color-mode-select {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  color: var(--muted);
+  font-size: var(--font-caption);
+}
+/* ラベルは折り返さない(狭いときは、置く側が、行ごと折り返す) */
+.color-mode-select > span {
+  flex: none;
+  white-space: nowrap;
+}
+.color-mode-select--field {
+  position: relative;
+}
+.color-mode-select--field > button {
+  max-width: none;
+  width: 100%;
+  justify-content: space-between;
+  min-height: var(--standard-row-height);
+  padding-inline: var(--space-3);
+}
+.color-mode-select--field .color-mode-popup {
+  left: 0;
+  right: auto;
+}
+.color-mode-select > button {
+  gap: 6px;
+  background: var(--panel);
+  min-width: 0;
+}
+.color-mode-select > button span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.color-mode-popup {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 10;
+  width: 240px;
+  min-width: 160px;
+  max-width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--panel);
+  padding: 4px;
+  box-shadow: 0 4px 12px #0004;
+}
+.color-mode-popup [role="option"] {
+  width: 100%;
+  justify-content: flex-start;
+  padding: 6px 8px;
+  border-radius: 0;
+  font-size: var(--font-label);
+}
+.color-mode-popup [aria-selected="true"] {
+  color: var(--accent);
+}
+.color-mode-help {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--panel);
+  color: var(--text);
+  font-size: var(--font-caption);
+  line-height: 1.5;
+  box-shadow: 0 4px 12px #0004;
+  pointer-events: none;
+}
+.color-mode-help-closed {
+  z-index: 10;
+  width: 240px;
+  max-width: 100%;
+}
+.color-mode-select.opens-up > :is(.color-mode-popup, .color-mode-help-closed),
+.color-mode-select.opens-up .color-mode-popup > .color-mode-help {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+}

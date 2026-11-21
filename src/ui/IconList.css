@@ -1,0 +1,21 @@
+@layer base, ui;
+@layer ui {
+/* IconList（ui/IconList.tsx）。見出し + アイコンのボタンの並び */
+.ui-icon-list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+.ui-icon-list-label {
+  min-width: var(--ui-icon-list-label-width, 0);
+  color: var(--text);
+  font-size: var(--font-label);
+  white-space: nowrap;
+}
+.ui-icon-list-items {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+}

@@ -1,0 +1,22 @@
+@layer base, ui;
+@layer ui {
+/* InlineFrame（ui/InlineFrame.tsx）。インラインの要素を、行ごとに詰めて並べる */
+.ui-inline-frame {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+  min-width: 0;
+  padding: var(--space-2) var(--ui-pad-x);
+}
+/* 枠が左右の余白を持つので、中の文字(Text)は、自分の左右の余白を持たない(二重にならない) */
+.ui-inline-frame .ui-text {
+  padding-inline: 0;
+  width: auto;
+}
+/* 改行(InlineBreak): 幅いっぱいの、高さ0の要素で、次の要素を次の行へ送る */
+.ui-inline-break {
+  flex: 0 0 100%;
+  height: 0;
+}
+}

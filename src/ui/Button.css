@@ -1,0 +1,20 @@
+@layer base, ui;
+@layer ui {
+/* Button（ui/Button.tsx）。文字のボタン（塗りのカード状）。色は tokens.css の変数を使う。親の文脈には依存しない */
+.ui-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: fit-content;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  border: 0;
+  border-radius: var(--ui-card-radius);
+  background: var(--surface);
+  color: var(--muted);
+}
+.ui-button:hover:not(:disabled) {
+  background: var(--heading-hover);
+  color: var(--text);
+}
+}

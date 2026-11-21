@@ -1,0 +1,157 @@
+@layer base, ui;
+@layer ui {
+/* StepSlider（ui/StepSlider.tsx）。色・余白などは styles.css の :root の変数を使う */
+.setting-row.scale-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+  row-gap: var(--space-1);
+  align-items: baseline;
+  /* 上下にも余裕を持たせる(左右は、行(.setting-row)が持つ) */
+  padding-block: var(--space-2);
+}
+.scale-row .scale-value {
+  font-size: 20px;
+  font-weight: var(--weight-strong);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+/* 溝・塗り・つまみは、input の下に自前で描く(段階が変わるとき、滑らせるため)。
+   input は、操作を受けるだけで、見えない(透明)。 */
+.scale-row .scale-track {
+  --thumb: 20px;
+  grid-column: 1 / -1;
+  position: relative;
+  height: var(--thumb);
+}
+.scale-track::before {
+  content: "";
+  position: absolute;
+  inset: 50% 0 auto;
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--slider-fill) 26%, transparent);
+}
+/* 現在位置までを塗る */
+.scale-progress {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 999px;
+  background: var(--slider-fill);
+  width: calc(var(--thumb) / 2 + (100% - var(--thumb)) * var(--scale-index) / var(--scale-max, 4));
+}
+.scale-thumb {
+  position: absolute;
+  top: 0;
+  left: calc((100% - var(--thumb)) * var(--scale-index) / var(--scale-max, 4));
+  width: var(--thumb);
+  height: var(--thumb);
+  border-radius: 50%;
+  /* SegmentedControl の選択の塗り・Switch のつまみと同じ作り: 塗り + 縁 + 影、中に芯 */
+  background: var(--selected-fill);
+  box-shadow: inset 0 0 0 1px var(--button-line), 0 1px 4px #0004;
+  display: grid;
+  place-items: center;
+}
+.scale-thumb::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--selected-ink);
+}
+/* つまみの動き: 触れると少し大きく、つかむと(ドラッグ中)さらに大きく、芯も広がる。色は変えない */
+.scale-thumb,
+.scale-thumb::after {
+  transition:
+    scale 150ms var(--scale-easing, ease),
+    background-color 150ms;
+}
+.scale-track:hover .scale-thumb,
+.scale-track:has(.scale-slider:focus-visible) .scale-thumb {
+  scale: 1.1;
+}
+.scale-row[data-dragging] .scale-thumb {
+  scale: 1.25;
+}
+.scale-row[data-dragging] .scale-thumb::after {
+  scale: 1.5;
+}
+/* 段階が変わるときだけ滑らせる(つまみを動かしている間は、指に付ける) */
+.scale-row:not([data-dragging]) .scale-progress {
+  transition: width var(--scale-duration, 250ms) var(--scale-easing, ease);
+}
+.scale-row:not([data-dragging]) .scale-thumb {
+  transition:
+    left var(--scale-duration, 250ms) var(--scale-easing, ease),
+    scale 150ms var(--scale-easing, ease);
+}
+@media (prefers-reduced-motion: reduce) {
+  .scale-row :is(.scale-progress, .scale-thumb, .scale-thumb::after) {
+    transition: none !important;
+  }
+}.scale-row .scale-slider {
+  position: relative;
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: var(--thumb);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.scale-row .scale-slider::-webkit-slider-runnable-track {
+  height: var(--thumb);
+  background: transparent;
+}
+.scale-row .scale-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: var(--thumb);
+  height: var(--thumb);
+  margin-top: 0;
+  border: 0;
+  background: transparent;
+}
+.scale-row .scale-slider::-moz-range-track {
+  height: var(--thumb);
+  background: transparent;
+}
+.scale-row .scale-slider::-moz-range-thumb {
+  width: var(--thumb);
+  height: var(--thumb);
+  border: 0;
+  background: transparent;
+}
+.scale-row .scale-slider:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+.scale-ticks {
+  grid-column: 1 / -1;
+  position: relative;
+  height: 22px;
+  margin-top: calc(-1 * var(--space-1));
+}
+.scale-ticks button {
+  position: absolute;
+  top: 0;
+  left: calc(10px + (100% - 20px) * var(--tick-index) / var(--scale-max, 4));
+  min-width: 36px;
+  height: 22px;
+  padding: 0;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: var(--font-caption);
+  font-variant-numeric: tabular-nums;
+}
+.scale-ticks button[aria-pressed=true] {
+  color: var(--text);
+  font-weight: var(--weight-strong);
+}
+}

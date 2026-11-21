@@ -1,0 +1,32 @@
+@layer base, ui;
+@layer ui {
+/* Tabs（ui/Tabs.tsx）。切り替えのタブ。置く場所は、置く側が決める */
+.ui-tabs {
+  display: flex;
+  min-width: 0;
+}
+.ui-tabs[data-orientation="vertical"] {
+  flex-direction: column;
+}
+.ui-tabs > button {
+  flex: 1;
+  min-width: 64px;
+  min-height: 26px;
+  padding: 4px 10px;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: var(--font-label);
+}
+/* タブの間を、細い線で仕切る */
+.ui-tabs[data-orientation="vertical"] > button + button {
+  border-top: 1px solid var(--border);
+}
+.ui-tabs[data-orientation="horizontal"] > button + button {
+  border-left: 1px solid var(--border);
+}
+.ui-tabs > button[aria-selected="true"] {
+  color: var(--accent);
+  background: var(--active);
+}
+}

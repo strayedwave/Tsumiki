@@ -1,0 +1,73 @@
+@layer base, ui;
+@layer ui {
+/* SettingSection / SettingRow（ui/SettingSection.tsx）。設定の1グループ（小さな見出し＋塗りのカード）と、その中の1行。
+   色・余白は tokens.css の変数を使う。親の文脈（設定ダイアログなど）には依存しない。
+   余白は、カードではなく、行（部品）が自分で持つ（--ui-pad-x）。 */
+.setting-section {
+  margin: 0;
+  /* 上にも余白を持つ(見出しが、部品の上端に付かない)。上 8 + 下 4 = 次のグループとの間 12 */
+  padding: var(--space-2) var(--content-inset) var(--space-1);
+  padding-inline-end: calc(var(--content-inset) + var(--overlay-scroll-inset, 0px));
+}
+.setting-section h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 0;
+  margin: 0 0 var(--space-2);
+  padding: 0 var(--space-1);
+  background: none;
+  color: var(--muted);
+  font-size: var(--font-caption);
+  font-weight: var(--weight-strong);
+  letter-spacing: 0;
+}
+.setting-section h2 svg {
+  color: var(--accent);
+}
+/* グループの囲い: 薄い半透明の塗りだけ(線なし)。左右の余白は持たない(行が持つ) */
+.setting-card,
+.setting-plain {
+  container-type: inline-size;
+  border: 0;
+  border-radius: var(--ui-card-radius);
+  background: var(--card-fill);
+  padding-block: var(--space-3);
+  padding-inline: 0;
+}
+.setting-row {
+  display: grid;
+  grid-template-columns: 84px minmax(0,1fr);
+  gap: 12px;
+  align-items: center;
+  min-height: 32px;
+  padding-inline: var(--ui-pad-x);
+}
+.setting-row + .setting-row {
+  margin-top: var(--space-2);
+}
+.setting-row > span {
+  color: var(--text);
+  font-size: var(--font-body);
+}
+.setting-subheading {
+  margin: var(--space-3) 0 var(--space-1);
+  color: var(--muted);
+  font-size: var(--font-caption);
+  font-weight: var(--weight-strong);
+  letter-spacing: 0;
+}
+.setting-subheading:first-child {
+  margin-top: 0;
+}
+/* カードが狭いときは、ラベルと操作を縦に並べる */
+@container (max-width: 280px) {
+  .setting-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+  .setting-row + .setting-row {
+    margin-top: var(--space-3);
+  }
+}
+}

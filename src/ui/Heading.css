@@ -1,0 +1,53 @@
+@layer base, ui;
+@layer ui {
+/* Heading（ui/Heading.tsx）。見出し + 説明が一体になったブロック */
+.ui-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  padding: var(--space-2) var(--ui-pad-x);
+  text-align: left;
+  justify-content: flex-start;
+}
+.ui-heading-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.ui-heading-with-actions {
+  flex-wrap: wrap;
+  row-gap: var(--space-1);
+}
+.ui-heading-main {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-3);
+  flex: 1 1 8rem;
+  min-width: 0;
+  align-self: stretch;
+  padding: 0;
+  text-align: left;
+}
+.ui-heading-main > :not(.ui-heading-text) {
+  flex-shrink: 0;
+}
+.ui-heading-text > strong {
+  color: var(--text);
+  font-size: var(--font-body);
+  line-height: var(--line-heading);
+  font-weight: var(--weight-strong);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ui-heading-text > small {
+  color: var(--muted);
+  font-size: var(--font-caption);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+}

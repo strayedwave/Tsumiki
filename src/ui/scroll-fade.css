@@ -1,0 +1,30 @@
+/* ===== スクロール一覧(`.scroll-fade` を付けた要素だけ。スクリプトを含むフォルダ型の一覧に使う) =====
+   隠れている側の端にフェードを落として、続きがあることを伝える。
+   スクロール位置に連動させる(CSSのみ)。先頭では上のフェードなし、末尾では下のフェードなし。
+   スクロールできない領域では、アニメーションが動かず、フェードも出ない。 */
+@property --fade-top {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --fade-bottom {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@keyframes fade-top-in {
+  from { --fade-top: 0px; }
+  to { --fade-top: var(--fade-size); }
+}
+@keyframes fade-bottom-out {
+  from { --fade-bottom: var(--fade-size); }
+  to { --fade-bottom: 0px; }
+}
+.scroll-fade {
+  --fade-size: 32px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 var(--fade-top), #000 calc(100% - var(--fade-bottom)), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 var(--fade-top), #000 calc(100% - var(--fade-bottom)), transparent 100%);
+  animation: fade-top-in linear both, fade-bottom-out linear both;
+  animation-timeline: scroll(self block), scroll(self block);
+  animation-range: 0 var(--fade-size), calc(100% - var(--fade-size)) 100%;
+}

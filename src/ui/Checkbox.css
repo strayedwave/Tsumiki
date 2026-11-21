@@ -1,0 +1,10 @@
+@layer base, ui;
+@layer ui {
+/* Checkbox（ui/Checkbox.tsx）。チェックボックス + 文字 */
+.ui-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: var(--font-label);
+}
+}

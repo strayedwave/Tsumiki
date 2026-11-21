@@ -1,0 +1,76 @@
+@layer base, ui;
+@layer ui {
+/* SegmentedControl（ui/SegmentedControl.tsx）。丸いトラックと、塗りで示す選択項目。
+   色は tokens.css の変数（--surface など）を使う。親の文脈には依存しない */
+.segments {
+  position: relative;
+  display: flex;
+  gap: 4px;
+  min-width: 0;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--surface);
+}
+/* 選択項目の塗り。選んだ項目の位置・大きさへ、滑って移る（位置は SegmentedControl.tsx が決める）。
+   測れない間（data-thumb なし）は表示せず、選択中のボタン自身の塗りで代わる */
+.segments-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  border-radius: 999px;
+  background: var(--selected-fill);
+  box-shadow: inset 0 0 0 1px var(--button-line), 0 1px 4px #0004;
+  pointer-events: none;
+}
+.segments[data-thumb] .segments-thumb {
+  display: block;
+}
+.segments[data-animate] .segments-thumb {
+  transition:
+    transform var(--segments-duration, 250ms) var(--segments-easing, ease),
+    width var(--segments-duration, 250ms) var(--segments-easing, ease),
+    height var(--segments-duration, 250ms) var(--segments-easing, ease);
+}
+@media (prefers-reduced-motion: reduce) {
+  .segments[data-animate] .segments-thumb {
+    transition: none;
+  }
+}
+.segments button {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 28px;
+  /* 文字が、選択の塗りの端に付かないように、左右に余白を持つ */
+  padding: 4px 12px;
+  gap: 6px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: var(--font-label);
+  transition: background-color 0.15s, color 0.15s;
+}
+.segments button:hover:not([aria-pressed="true"]) {
+  background: var(--surface-hover);
+  color: color-mix(in srgb, var(--text) 45%, var(--muted));
+}
+.segments button[aria-pressed="true"] {
+  color: var(--selected-ink);
+  font-weight: var(--weight-strong);
+}
+/* 選択中のボタンは、塗りを持たない（塗りは、後ろを滑る .segments-thumb）。
+   ホバー・押下の色が、塗りの前に出ないように、どの状態でも透明にする */
+.segments[data-thumb] button[aria-pressed="true"],
+.segments[data-thumb] button[aria-pressed="true"]:hover,
+.segments[data-thumb] button[aria-pressed="true"]:active {
+  background: transparent;
+}
+/* 塗り（.segments-thumb）が出せないときだけ、ボタン自身を塗る */
+.segments:not([data-thumb]) button[aria-pressed="true"] {
+  background: var(--selected-fill);
+  box-shadow: inset 0 0 0 1px var(--button-line), 0 1px 4px #0004;
+}
+.segments button[aria-pressed="true"] svg {
+  color: var(--selected-ink);
+}
+}

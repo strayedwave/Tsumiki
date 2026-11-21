@@ -1,0 +1,17 @@
+@layer base, ui;
+@layer ui {
+/* Text（ui/Text.tsx）。文字だけを表示する、全幅の部品。余白は自分が持つ */
+.ui-text {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: var(--space-2) var(--ui-pad-x);
+  color: var(--text);
+  font-size: var(--font-body);
+  line-height: var(--line-body);
+  overflow-wrap: anywhere;
+}
+.ui-text-muted {
+  color: var(--muted);
+}
+}

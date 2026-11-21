@@ -1,0 +1,153 @@
+@layer base, ui;
+@layer ui {
+/* NumberSlider（ui/NumberSlider.tsx）。色・余白などは styles.css の :root の変数を使う */
+.cmyk-channel label input {
+  width: 100%;
+  height: 26px;
+  padding: 2px 4px;
+  color: var(--text);
+  font-size: var(--font-caption);
+  font-variant-numeric: tabular-nums;
+}
+.cmyk-channel label input:disabled {
+  opacity: .65;
+}
+.color-channel-slider {
+  display: grid;
+  grid-template-columns: 16px 42px minmax(24px, 1fr);
+  align-items: center;
+  gap: 4px;
+}
+.color-channel-slider input[type=number],
+.cmyk-channel > input {
+  appearance: textfield;
+  width: 100%;
+  min-width: 0;
+  height: 22px;
+  padding: 0 4px;
+  font-size: var(--font-caption);
+  font-variant-numeric: tabular-nums;
+}
+.color-channel-slider input[type=number]::-webkit-inner-spin-button,
+.color-channel-slider input[type=number]::-webkit-outer-spin-button,
+.cmyk-channel label input[type=number]::-webkit-inner-spin-button,
+.cmyk-channel label input[type=number]::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+.color-channel-slider input[type=number],
+.cmyk-channel label input[type=number] {
+  border: 0;
+  text-align: center;
+}
+.color-channel-slider input[type=range],
+.cmyk-channel > input {
+  appearance: none;
+  width: 100%;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.color-channel-slider input[type=range]::-webkit-slider-runnable-track,
+.cmyk-channel > input::-webkit-slider-runnable-track {
+  height: 6px;
+  border: 0;
+  border-radius: 0;
+  background: var(--range-track, linear-gradient(to right, var(--accent), var(--accent)));
+}
+.color-channel-slider input[type=range]::-webkit-slider-thumb,
+.cmyk-channel > input::-webkit-slider-thumb {
+  appearance: none;
+  width: 4px;
+  height: 14px;
+  margin-top: -4px;
+  border: 0;
+  border-radius: 0;
+  /* つまみは、どんな色の溝の上でも見えるように、白に、暗い縁を付ける(ライト・ダークで同じ) */
+  background: #fff;
+  /* 縁は左右だけ(上下に出すと、行の外へ、はみ出して見える) */
+  box-shadow: -1px 0 0 rgb(0 0 0 / 60%), 1px 0 0 rgb(0 0 0 / 60%);
+}
+.color-channel-slider input[type=range]::-moz-range-track,
+.cmyk-channel > input::-moz-range-track {
+  height: 6px;
+  border: 0;
+  border-radius: 0;
+  background: var(--range-track, linear-gradient(to right, var(--accent), var(--accent)));
+}
+.color-channel-slider input[type=range]::-moz-range-thumb,
+.cmyk-channel > input::-moz-range-thumb {
+  width: 4px;
+  height: 14px;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: -1px 0 0 rgb(0 0 0 / 60%), 1px 0 0 rgb(0 0 0 / 60%);
+}
+.color-channel-slider {
+  /* 行の高さいっぱい(行の下の線は、部品の line が、擬似要素で上に重ねて描く) */
+  --cell-height: var(--standard-row-height);
+  min-height: var(--standard-row-height);
+  /* 左右とも余白なし: ラベルは線から、スライダーは端まで届かせる */
+  padding-inline: 0;
+  /* 行の下の線は、部品の line="bottom" で出す(色は枠線の色) */
+  --line-color: var(--border);
+  /* ラベル・数値欄・スライダーは、行の高さいっぱいのセルにする */
+  /* 見出しの列は、字下げ(--tree-pad)を含む。単独で使うときの既定は 12px(見出しが端に付かない) */
+  grid-template-columns: calc(var(--tree-pad, 12px) + 22px) 48px minmax(70px, 1fr);
+  align-items: stretch;
+  gap: 0;
+}
+.color-channel-slider label {
+  display: grid;
+  place-items: center;
+}
+.color-channel-slider input[type=number] {
+  height: var(--cell-height);
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  background: var(--panel);
+  /* 数値欄とスライダーの間を仕切る */
+  border-right: 1px solid var(--border);
+}
+.color-channel-slider input[type=range] {
+  height: var(--cell-height);
+  margin: 0;
+}
+.color-channel-slider input[type=range]::-webkit-slider-runnable-track {
+  height: var(--cell-height);
+}
+.color-channel-slider input[type=range]::-webkit-slider-thumb {
+  height: var(--cell-height);
+  margin-top: 0;
+}
+.color-channel-slider input[type=range]::-moz-range-track {
+  height: var(--cell-height);
+}
+.color-channel-slider input[type=range]::-moz-range-thumb {
+  height: var(--cell-height);
+}
+.cmyk-channel {
+  min-width: 0;
+}
+.cmyk-channel label {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 52px;
+  align-items: center;
+  gap: 5px;
+  color: var(--muted);
+  font-size: var(--font-label);
+}
+.cmyk-channel > input {
+  display: block;
+  margin: 3px 0 0;
+}
+/* 見出しなし(heading を渡さない)のときは、数値欄とスライダーの2列 */
+.color-channel-slider.number-slider-headless {
+  grid-template-columns: 48px minmax(70px, 1fr);
+}
+}

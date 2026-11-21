@@ -1,0 +1,120 @@
+@layer base, ui;
+@layer base {
+:root {
+  --font-caption: 12px;
+  --font-label: 13px;
+  --font-body: 14px;
+  --font-heading: 16px;
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-strong: 650;
+  --line-body: 1.55;
+  --line-heading: 1.4;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --content-inset: 22px;
+  --chrome-inset: 14px;
+  --standard-row-height: 40px;
+  --radius-control: 6px;
+  --control-size: 32px;
+  --icon-size: 16px;
+  color-scheme: dark;
+  --bg: #000;
+  --panel: #121212;
+  --input-bg: var(--panel);
+  --raised: #1a1a1a;
+  --border: #333;
+  --focus-ring: #a0a7b0;
+  --text: #f1f1f1;
+  --muted: #a6a6a6;
+  --accent: #a8c9bb;
+  --active: #0c1713;
+  --danger: #e6a19b;
+  --divider: #383838;
+  --tree-pad: 12px;
+  --heading-hover: color-mix(in srgb, var(--bg), white 14%);
+  --list-radius: 0;
+  --field-border: transparent;
+  --select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6' fill='none' stroke='%23f1f1f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f0f0f0;
+  --panel: #d9d9d9;
+  --input-bg: #fff;
+  --raised: #e5e5e5;
+  --border: #b5b5b5;
+  --focus-ring: #666;
+  --text: #404040;
+  --muted: #595959;
+  --accent: #285783;
+  --active: #bcd5ef;
+  --danger: #ad3434;
+  --divider: #dadada;
+  --heading-hover: var(--raised);
+  --field-border: var(--border);
+  --select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6' fill='none' stroke='%23404040' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+:root {
+  color: var(--text);
+  background: var(--bg);
+  font: var(--font-body) / var(--line-body) system-ui, sans-serif;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+:where(button) {
+  border: 0;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+}
+:where(button):disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+:where(button, input, select, textarea, a, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+}
+/* ui 部品の既定値（トークン）。部品は、どの画面に置かれても、この値で正しく表示される。
+   画面ごとに変えたいときは、その画面の要素で同じ名前の変数を上書きする。 */
+:root {
+  /* 部品が自分の中に持つ、左右の余白（行・欄の文字や要素が、端に付かないため） */
+  --ui-pad-x: 14px;
+  /* 設定のグループ（カード）の角丸 */
+  --ui-card-radius: 6px;
+  /* 面・塗り: 半透明の薄い面（切り替えの下地、スライダーの溝、カードなど） */
+  --surface: color-mix(in srgb, var(--text) 14%, transparent);
+  --surface-hover: color-mix(in srgb, var(--text) 20%, transparent);
+  --surface-line: color-mix(in srgb, var(--text) 9%, transparent);
+  --card-fill: color-mix(in srgb, var(--text) 4%, transparent);
+  --card-fill-hover: color-mix(in srgb, var(--text) 8%, transparent);
+  /* 塗りのボタン（選択中・スイッチON・主ボタン）: ライトもダークも完全な黒。縁は付けない */
+  --button-fill: #000;
+  --button-ink: #fff;
+  --button-line: transparent;
+  --slider-fill: var(--text);
+  /* 選択中・オンの塗り（切り替え・スイッチ）と、その上の文字・つまみ。
+     ダークは明るい塗り（暗い背景でも、選ばれていることが分かる）、ライトは黒 */
+  --selected-fill: var(--text);
+  --selected-ink: #000;
+}
+:root[data-theme="light"] {
+  --surface: color-mix(in srgb, black 8%, transparent);
+  --surface-hover: color-mix(in srgb, black 13%, transparent);
+  --surface-line: color-mix(in srgb, black 8%, transparent);
+  --slider-fill: #000;
+  --selected-fill: #000;
+  --selected-ink: #fff;
+}

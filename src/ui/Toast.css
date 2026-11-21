@@ -1,0 +1,30 @@
+@layer base, ui;
+@layer ui {
+/* Toast（ui/Toast.tsx）。色・余白などは styles.css の :root の変数を使う */
+.toast {
+  position: absolute;
+  z-index: 20;
+  inset-inline: var(--space-3);
+  bottom: calc(var(--standard-row-height) + var(--space-2));
+  display: flex;
+  /* アイコン・文章・閉じるボタンを、縦方向の中央にそろえる */
+  align-items: center;
+  gap: 7px;
+  padding: 7px 8px 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--raised);
+  color: var(--danger);
+  font-size: var(--font-label);
+  line-height: var(--line-body);
+  box-shadow: 0 4px 14px rgb(0 0 0 / .25);
+}
+.toast > svg {
+  flex: none;
+}
+.toast > span {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+}

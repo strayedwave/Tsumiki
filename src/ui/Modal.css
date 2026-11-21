@@ -1,0 +1,155 @@
+@layer base, ui;
+@layer ui {
+.dialog::backdrop {
+  background: #0006;
+  -webkit-backdrop-filter: blur(10px) saturate(1.15);
+  backdrop-filter: blur(10px) saturate(1.15);
+}
+.dialog {
+  --dialog-glass: color-mix(in srgb, var(--bg) 62%, transparent);
+  --dialog-line: color-mix(in srgb, var(--text) 14%, transparent);
+  --field-fill: color-mix(in srgb, var(--text) 8%, transparent);
+  --field-fill-hover: color-mix(in srgb, var(--text) 14%, transparent);
+  color: inherit;
+}
+.dialog:not(.dialog--glass) {
+  margin: auto;
+  width: calc(100% - var(--space-4) * 2);
+  max-width: 340px;
+  max-height: calc(100% - var(--space-4) * 2);
+  overflow: auto;
+}
+.dialog:not(.dialog--glass)[open] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+}
+.dialog:not(.dialog--glass) {
+  padding: 24px 20px 20px;
+  gap: 16px;
+  background: var(--dialog-glass);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  backdrop-filter: blur(28px) saturate(1.5);
+  border: 1px solid var(--dialog-line);
+  border-radius: 8px;
+  box-shadow: 0 24px 64px #0006;
+  text-align: center;
+}
+:root[data-theme=light] .dialog:not(.dialog--glass) {
+  box-shadow: 0 24px 64px #0003;
+}
+.modal-overlay > .dialog:not(.dialog--glass) {
+  position: relative;
+  inset: auto;
+  margin: 0;
+}
+.dialog:not(.dialog--glass) h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  font-size: var(--font-heading);
+  line-height: var(--line-heading);
+}
+.dialog:not(.dialog--glass) p {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--font-body);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* ダイアログ下部の操作ボタン */
+.dialog-actions {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 8px;
+  margin-top: 4px;
+}
+.dialog-actions button {
+  /* Button（ui）で作ったボタンも、列の幅いっぱいに、文字を中央にそろえる */
+  width: auto;
+  justify-content: center;
+  min-height: var(--standard-row-height);
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: 999px;
+  background: var(--field-fill);
+  color: var(--text);
+  font-size: var(--font-body);
+  transition: background-color 0.15s, opacity 0.15s;
+}
+.dialog-actions button:hover:not(:disabled) {
+  background: var(--field-fill-hover);
+}
+/* 主な操作は、文字色の塗り(ダークは白、ライトは黒)で目立たせる */
+.dialog-actions button.primary {
+  background: var(--text);
+  color: var(--bg);
+  font-weight: var(--weight-strong);
+}
+.dialog-actions button.primary:hover:not(:disabled) {
+  background: var(--text);
+  opacity: 0.85;
+}
+.dialog-actions button.danger {
+  background: #c8352f;
+  color: #fff;
+}
+.dialog-actions button.danger:hover:not(:disabled) {
+  background: #d9463f;
+  opacity: 1;
+}
+.dialog--glass {
+  --glass-fill: light-dark(
+    color-mix(in srgb, white 66%, transparent),
+    color-mix(in srgb, var(--bg, #202020) 62%, transparent)
+  );
+  --glass-line: light-dark(
+    color-mix(in srgb, black 12%, transparent),
+    color-mix(in srgb, var(--text, white) 14%, transparent)
+  );
+  box-sizing: border-box;
+  color: inherit;
+  margin: auto;
+  width: calc(100% - var(--space-2, 8px) * 2);
+  max-width: none;
+  height: fit-content;
+  max-height: calc(100% - var(--space-2, 8px) * 2);
+  padding: 0;
+  background: var(--glass-fill);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  backdrop-filter: blur(28px) saturate(1.5);
+  border: 1px solid var(--glass-line);
+  border-radius: 8px;
+  box-shadow:
+    0 24px 64px light-dark(#0003, #0006),
+    inset 0 1px 0 light-dark(#fff8, #ffffff1a);
+  overflow: auto;
+}
+.dialog--glass[open] {
+  display: flex;
+  flex-direction: column;
+}
+.modal-overlay > .dialog--glass {
+  position: relative;
+  inset: auto;
+  margin: 0;
+  width: 100%;
+  max-height: 100%;
+}
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2, 8px);
+  background: color-mix(in srgb, var(--bg, Canvas) 40%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+}
+}

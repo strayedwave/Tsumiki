@@ -1,0 +1,19 @@
+@layer base, ui;
+@layer ui {
+/* InlineButton（ui/InlineButton.tsx）。色・余白などは styles.css の :root の変数を使う */
+.inline-button {
+  width: 28px;
+  height: var(--control-size);
+  padding: 5px;
+  border-radius: var(--radius-control);
+}
+.inline-button svg {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+/* 選択中は、アイコンをアクセント色で塗る */
+.inline-button.selected svg {
+  color: var(--accent);
+  fill: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+}

@@ -1,0 +1,57 @@
+@layer base, ui;
+@layer ui {
+/* Switch（ui/Switch.tsx）。オン・オフのスイッチ行。
+   行が自分の左右の余白（--ui-pad-x）を持つ。親の文脈には依存しない */
+.toggle-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-height: var(--standard-row-height);
+  padding-inline: var(--ui-pad-x);
+}
+.toggle-row span {
+  flex: 1;
+  min-width: 0;
+  color: var(--text);
+  font-size: var(--font-body);
+}
+.toggle-row input[type="checkbox"] {
+  appearance: none;
+  flex-shrink: 0;
+  position: relative;
+  width: 40px;
+  height: 24px;
+  border: 0;
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--text) 24%, transparent);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+:root[data-theme="light"] .toggle-row input[type="checkbox"]:not(:checked) {
+  background: color-mix(in srgb, var(--text) 40%, transparent);
+}
+.toggle-row input[type="checkbox"]:checked {
+  background: var(--selected-fill);
+  box-shadow: inset 0 0 0 1px var(--button-line);
+}
+.toggle-row input[type="checkbox"]:before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px #0005;
+  transition: left 0.15s;
+}
+.toggle-row input[type="checkbox"]:checked:before {
+  left: 19px;
+  background: var(--selected-ink);
+}
+.toggle-row input[type="checkbox"]:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+}

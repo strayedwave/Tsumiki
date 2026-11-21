@@ -1,0 +1,19 @@
+@layer base, ui;
+@layer ui {
+/* アイコンの描き方（`iconPaint`）。ボタンに付く `data-icon-paint` で、中のSVGの塗りと縁を決める。
+   - stroke: 縁だけ（アイコンの元の描き方。何も付けないときと同じ）
+   - fill:   塗りだけ（縁なし）。閉じた図形のアイコン向き
+   - both:   塗り + 縁。塗りは、文字色を薄めた色（`--ui-icon-fill` で変えられる） */
+button[data-icon-paint="stroke"] svg {
+  fill: none;
+  stroke: currentColor;
+}
+button[data-icon-paint="fill"] svg {
+  fill: var(--ui-icon-fill, currentColor);
+  stroke: none;
+}
+button[data-icon-paint="both"] svg {
+  fill: var(--ui-icon-fill, color-mix(in srgb, currentColor 30%, transparent));
+  stroke: currentColor;
+}
+}

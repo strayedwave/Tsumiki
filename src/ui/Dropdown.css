@@ -1,0 +1,31 @@
+@layer base, ui;
+@layer ui {
+/* Dropdown（ui/Dropdown.tsx）。色・余白などは styles.css の :root の変数を使う。
+   矢印は、CSS変数 --select-chevron で受け取る */
+.dropdown {
+  display: flex;
+  gap: 0;
+  align-items: center;
+  min-width: 0;
+}
+.dropdown select {
+  flex: 1;
+  width: 0;
+  appearance: none;
+  height: var(--standard-row-height);
+  border-color: transparent;
+  border-radius: 0;
+  padding-inline: var(--space-3) calc(var(--space-3) + 13px + var(--space-2));
+  font-size: var(--font-label);
+  color: var(--text);
+  background-color: transparent;
+  background-image: var(--select-chevron);
+  background-position: right var(--space-3) center;
+  background-repeat: no-repeat;
+  background-size: 13px;
+}
+/* 選択前(値が空)は、文字を薄くする */
+.dropdown select:has(option[value=""]:checked) {
+  color: var(--muted);
+}
+}

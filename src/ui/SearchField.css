@@ -1,0 +1,34 @@
+@layer base, ui;
+@layer ui {
+/* SearchField（ui/SearchField.tsx）。色・余白などは styles.css の :root の変数を使う */
+.search-field {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--field-border);
+  background: var(--input-bg);
+  border-radius: var(--radius-control);
+  min-width: 0;
+  height: var(--search-control-size);
+  padding: 0 9px;
+  flex: 1;
+}
+.search-field:focus-within {
+  border-color: var(--focus-ring);
+  background: var(--active);
+}
+.search-field input {
+  border: 0;
+  outline: none;
+  background: none;
+  flex: 1;
+  min-width: 0;
+  font-size: var(--font-body);
+}
+.search-field input::placeholder {
+  color: var(--muted);
+}
+.search-field button {
+  padding: 2px;
+}
+}
